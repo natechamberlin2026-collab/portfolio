@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alfredo — Freelance Developer Portfolio. Discord bots, n8n automation, Notion workspaces, web scrapers.">
+  <title>Alfredo — Freelance Developer Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --fg: #e6edf3;
+      --fg-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79b8ff;
+      --border: #30363d;
+      --card: #161b22;
+      --success: #3fb950;
+      --warning: #d29922;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --fg: #24292f;
+        --fg-muted: #656d76;
+        --accent: #0969da;
+        --accent-hover: #0860ca;
+        --border: #d0d7de;
+        --card: #ffffff;
+        --success: #1a7f37;
+        --warning: #9a6700;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    header { text-align: center; padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #a371f7); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1rem; box-shadow: 0 0 30px rgba(88, 166, 255, 0.3); }
+    h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; background: linear-gradient(90deg, var(--fg), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tagline { font-size: 1.25rem; color: var(--fg-muted); margin-bottom: 1rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
+    .badge { padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--fg-muted); }
+    .badge.primary { background: rgba(88, 166, 255, 0.15); border-color: var(--accent); color: var(--accent); }
+    section { margin-bottom: 3rem; }
+    h2 { font-size: 1.75rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    h2::before { content: ''; width: 4px; height: 1.5rem; background: var(--accent); border-radius: 2px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
+    .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .card p { color: var(--fg-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.5; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .tag { font-size: 0.75rem; padding: 0.2rem 0.5rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 4px; color: var(--fg-muted); }
+    .card-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; transition: all 0.15s; border: 1px solid transparent; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; text-decoration: none; }
+    .btn-secondary { background: transparent; color: var(--fg); border-color: var(--border); }
+    .btn-secondary:hover { background: var(--bg-secondary); border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat { text-align: center; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.25rem; }
+    .cta { text-align: center; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-top: 2rem; }
+    .cta h2::before { display: none; }
+    footer { text-align: center; padding: 2rem; color: var(--fg-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+    .emoji { font-size: 1.2em; }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .container { padding: 1.5rem 1rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar" aria-hidden="true">🤷</div>
+      <h1>Alfredo</h1>
+      <p class="tagline">Freelance Developer — Discord Bots · n8n Automation · Notion Workspaces · Web Scrapers</p>
+      <p class="tagline"><strong>Hardworking, successful, chill.</strong> 🤷</p>
+      <div class="badges">
+        <span class="badge primary">TypeScript</span>
+        <span class="badge primary">Node.js</span>
+        <span class="badge">Discord.js</span>
+        <span class="badge">n8n</span>
+        <span class="badge">Notion API</span>
+        <span class="badge">Playwright</span>
+        <span class="badge">SQLite</span>
+        <span class="badge">Railway</span>
+      </div>
+    </header>
+
+    <section>
+      <h2><span class="emoji">📊</span> Quick Stats</h2>
+      <div class="stats">
+        <div class="stat"><div class="stat-value">6</div><div class="stat-label">Projects</div></div>
+        <div class="stat"><div class="stat-value">14</div><div class="stat-label">Discord Commands</div></div>
+        <div class="stat"><div class="stat-value">4</div><div class="stat-label">Notion Templates</div></div>
+        <div class="stat"><div class="stat-value">3</div><div class="stat-label">n8n Workflows</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="emoji">🚀</span> Portfolio Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><span class="emoji">🤖</span> Discord Bot Template</h3>
+          <p>Production-ready Discord.js v14 TypeScript bot with 14 slash commands: 7 moderation (ban, kick, mute, timeout, warn, purge), 4 utility (ping, serverinfo, userinfo, avatar), 3 fun (roll, 8ball, coinflip). SQLite WAL database, Winston logging, Railway deployment ready.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">Discord.js</span><span class="tag">SQLite</span><span class="tag">Winston</span><span class="tag">Railway</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/natechamberlin2026-collab/discord-bot-template" class="btn btn-primary" target="_blank">Code</a>
+            <a href="https://natechamberlin2026-collab.github.io/discord-bot-template/" class="btn btn-secondary" target="_blank">Docs</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><span class="emoji">⚙️</span> Discord Bot Starter Kit</h3>
+          <p>Modular bot framework with plugin system, event handler, command handler with cooldowns, custom commands, reaction roles, guild settings. Pre-built modules: Moderation (8 commands), Utility (4 commands), Fun (3 commands). Clean architecture for scaling.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">Discord.js</span><span class="tag">Modular</span><span class="tag">SQLite</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/natechamberlin2026-collab/discord-bot-starter-kit" class="btn btn-primary" target="_blank">Code</a>
+            <a href="https://natechamberlin2026-collab.github.io/discord-bot-starter-kit/" class="btn btn-secondary" target="_blank">Docs</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><span class="emoji">🔗</span> n8n Workflows</h3>
+          <p>3 production-ready workflow templates: Notion → Discord notifications (poll DB, post embed, mark notified), Notion → Google Sheets sync (hourly, incremental upsert), Twitter scraper placeholder (use Playwright scraper instead). Importable JSON, credential-managed.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Notion API</span><span class="tag">Discord Webhook</span><span class="tag">Google Sheets</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/natechamberlin2026-collab/n8n-workflows" class="btn btn-primary" target="_blank">Workflows</a>
+            <a href="https://natechamberlin2026-collab.github.io/n8n-workflows/" class="btn btn-secondary" target="_blank">Docs</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><span class="emoji">🐦</span> Twitter/X Scraper</h3>
+          <p>Playwright-based CLI scraper with Commander.js. Modes: user timeline, search, hashtag. Authenticated via cookies (auth_token, ct0). Headless, resource blocking for speed. Exports JSON/CSV. CI-ready with GitHub Actions.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">Playwright</span><span class="tag">CLI</span><span class="tag">CSV/JSON</span><span class="tag">GitHub Actions</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/natechamberlin2026-collab/twitter-scraper" class="btn btn-primary" target="_blank">Code</a>
+            <a href="https://natechamberlin2026-collab.github.io/twitter-scraper/" class="btn btn-secondary" target="_blank">Docs</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><span class="emoji">🧠</span> Notion Templates (4)</h3>
+          <p>Complete workspace systems: Second Brain (PARA method, 7 DBs + 6 n8n automations), Project Tracker (Clients, Projects, Milestones, Invoices, Tasks, Time Entries), Content Calendar (Ideas, Calendar, Metrics, Pillars, Repurposing), Client Portal (public-facing status, deliverables, comms, invoices).</p>
+          <div class="tags">
+            <span class="tag">Notion</span><span class="tag">PARA</span><span class="tag">Freelance</span><span class="tag">Content</span><span class="tag">Client Portal</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/natechamberlin2026-collab/notion-templates" class="btn btn-primary" target="_blank">Templates</a>
+            <a href="https://natechamberlin2026-collab.github.io/notion-templates/" class="btn btn-secondary" target="_blank">Guide</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="emoji">💼</span> Services & Rates</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><span class="emoji">🤖</span> Discord Bot Development</h3>
+          <p>Custom bots, template customization, deployment, 30-day support.</p>
+          <div class="tags"><span class="tag">$500–3,000</span><span class="tag">1–2 weeks</span></div>
+          <div class="card-links"><a href="#contact" class="btn btn-primary">Inquire</a></div>
+        </article>
+        <article class="card">
+          <h3><span class="emoji">⚡</span> n8n Automation</h3>
+          <p>Workflow design, Notion/Sheets/CRM/Discord integrations, production hardening.</p>
+          <div class="tags"><span class="tag">$300–2,000</span><span class="tag">3–7 days</span></div>
+          <div class="card-links"><a href="#contact" class="btn btn-primary">Inquire</a></div>
+        </article>
+        <article class="card">
+          <h3><span class="emoji">📋</span> Notion Workspace + Automation</h3>
+          <p>Template customization, database design, n8n/Make pipelines, team onboarding.</p>
+          <div class="tags"><span class="tag">$500–3,000</span><span class="tag">1–2 weeks</span></div>
+          <div class="card-links"><a href="#contact" class="btn btn-primary">Inquire</a></div>
+        </article>
+        <article class="card">
+          <h3><span class="emoji">🕷️</span> Web Scraping / Data Extraction</h3>
+          <p>Playwright/Puppeteer/Cheerio scrapers, authenticated, paginated, CI-ready, clean JSON/CSV output.</p>
+          <div class="tags"><span class="tag">$200–1,000</span><span class="tag">2–5 days</span></div>
+          <div class="card-links"><a href="#contact" class="btn btn-primary">Inquire</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2><span class="emoji">📬</span> Let's Work Together</h2>
+      <div class="cta">
+        <p style="max-width: 600px; margin: 0 auto 1.5rem; color: var(--fg-muted);">
+          Need a Discord bot, n8n workflow, Notion workspace, or data scraper? I build clean, typed, deployed solutions with documentation and support included.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="https://upwork.com" class="btn btn-primary" target="_blank">Upwork</a>
+          <a href="https://contra.com" class="btn btn-secondary" target="_blank">Contra</a>
+          <a href="https://fiverr.com" class="btn btn-secondary" target="_blank">Fiverr</a>
+          <a href="https://github.com/natechamberlin2026-collab" class="btn btn-secondary" target="_blank">GitHub</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--fg-muted);">
+          Or message me directly — I respond within 4 hours (PST business hours).
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built by <strong>Alfredo</strong> — Hardworking, successful, chill. 🤷</p>
+      <p style="margin-top: 0.5rem;">All code MIT licensed. Templates free to use, customize, sell.</p>
+    </footer>
+  </div>
+</body>
+</html>
