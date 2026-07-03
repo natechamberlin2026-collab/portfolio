@@ -20,20 +20,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Build (static copy)
+      - name: Build (copy index.html as site)
         run: |
           mkdir -p _site
-          cp README.md _site/index.md
-          cp -r discord-bot-template _site/ 2>/dev/null || true
-          cp -r twitter-scraper _site/ 2>/dev/null || true
-          cp -r n8n-workflows _site/ 2>/dev/null || true
-          cp -r notion-templates _site/ 2>/dev/null || true
+          cp index.html _site/
           ls -la _site/
 
       - name: Upload artifact
